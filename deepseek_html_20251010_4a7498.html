@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete HTML Tags Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .search-box {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #tagSearch {
+            width: 60%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tag-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .category-btn {
+            padding: 8px 16px;
+            background-color: #e9ecef;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover {
+            background-color: #d0d7e1;
+        }
+        
+        .category-btn.active {
+            background-color: #2575fc;
+            color: white;
+        }
+        
+        .tag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tag-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tag-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tag-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .tag-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2575fc;
+            margin-right: 10px;
+        }
+        
+        .tag-type {
+            background-color: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .tag-description {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .tag-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-bottom: 15px;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .tag-usage {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        @media (max-width: 768px) {
+            .tag-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #tagSearch {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Complete HTML Tags Reference</h1>
+            <p class="subtitle">A comprehensive guide to all HTML tags with examples and usage guidelines</p>
+            <div class="search-box">
+                <input type="text" id="tagSearch" placeholder="Search for HTML tags...">
+            </div>
+        </header>
+        
+        <div class="tag-categories">
+            <button class="category-btn active" data-category="all">All Tags</button>
+            <button class="category-btn" data-category="structure">Structure</button>
+            <button class="category-btn" data-category="text">Text</button>
+            <button class="category-btn" data-category="media">Media</button>
+            <button class="category-btn" data-category="forms">Forms</button>
+            <button class="category-btn" data-category="semantic">Semantic</button>
+        </div>
+        
+        <div class="tag-grid" id="tagContainer">
+            <!-- Tag cards will be inserted here by JavaScript -->
+        </div>
+        
+        <footer>
+            <p>HTML Tags Reference Guide &copy; 2023 | Created for educational purposes</p>
+        </footer>
+    </div>
+
+    <script>
+        // HTML tags data
+        const htmlTags = [
+            {
+                name: "html",
+                category: "structure",
+                description: "The root element of an HTML document that contains all other HTML elements.",
+                example: "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>...</head>\n  <body>...</body>\n</html>",
+                usage: "Always the outermost tag in an HTML document."
+            },
+            {
+                name: "head",
+                category: "structure",
+                description: "Contains meta-information about the document, like its title, scripts, and styles.",
+                example: "<head>\n  <title>My Page</title>\n  <meta charset=\"UTF-8\">\n</head>",
+                usage: "Placed immediately after the opening <html> tag."
+            },
+            {
+                name: "body",
+                category: "structure",
+                description: "Contains the visible content of the HTML document.",
+                example: "<body>\n  <h1>Welcome</h1>\n  <p>This is my page.</p>\n</body>",
+                usage: "Placed after the <head> section."
+            },
+            {
+                name: "h1 to h6",
+                category: "text",
+                description: "Heading elements, with h1 being the highest level and h6 the lowest.",
+                example: "<h1>Main Heading</h1>\n<h2>Subheading</h2>\n<h3>Section Heading</h3>",
+                usage: "Use for document structure. Only one h1 per page for SEO."
+            },
+            {
+                name: "p",
+                category: "text",
+                description: "Defines a paragraph of text.",
+                example: "<p>This is a paragraph of text.</p>\n<p>This is another paragraph.</p>",
+                usage: "Use for blocks of text, not for layout."
+            },
+            {
+                name: "a",
+                category: "text",
+                description: "Creates a hyperlink to other web pages, files, or locations.",
+                example: '<a href=\"https://example.com\">Visit Example</a>',
+                usage: "Always include the href attribute for the link destination."
+            },
+            {
+                name: "img",
+                category: "media",
+                description: "Embeds an image in the document.",
+                example: '<img src=\"image.jpg\" alt=\"Description of image\">',
+                usage: "Always include the alt attribute for accessibility."
+            },
+            {
+                name: "div",
+                category: "structure",
+                description: "A generic container for flow content with no semantic meaning.",
+                example: "<div class=\"container\">\n  <p>Content here</p>\n</div>",
+                usage: "Use for layout and styling purposes."
+            },
+            {
+                name: "span",
+                category: "text",
+                description: "A generic inline container for phrasing content.",
+                example: "<p>This is <span class=\"highlight\">important</span> text.</p>",
+                usage: "Use to apply styles to part of text without breaking flow."
+            },
+            {
+                name: "ul, ol, li",
+                category: "text",
+                description: "Create unordered (bulleted) and ordered (numbered) lists.",
+                example: "<ul>\n  <li>First item</li>\n  <li>Second item</li>\n</ul>",
+                usage: "Use ul for unordered lists, ol for ordered lists."
+            },
+            {
+                name: "table, tr, td, th",
+                category: "structure",
+                description: "Create tables with rows and cells.",
+                example: "<table>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>John</td>\n    <td>30</td>\n  </tr>\n</table>",
+                usage: "Use for tabular data, not for layout."
+            },
+            {
+                name: "form",
+                category: "forms",
+                description: "Creates an HTML form for user input.",
+                example: "<form action=\"/submit\" method=\"post\">\n  <input type=\"text\" name=\"username\">\n  <button type=\"submit\">Send</button>\n</form>",
+                usage: "Contains form elements like inputs, selects, and buttons."
+            },
+            {
+                name: "input",
+                category: "forms",
+                description: "Creates an input field where users can enter data.",
+                example: '<input type=\"text\" name=\"name\" placeholder=\"Enter your name\">',
+                usage: "Type attribute determines the kind of input (text, email, password, etc.)."
+            },
+            {
+                name: "button",
+                category: "forms",
+                description: "Creates a clickable button.",
+                example: "<button type=\"button\">Click Me</button>",
+                usage: "Can be used inside or outside forms. Specify type attribute."
+            },
+            {
+                name: "textarea",
+                category: "forms",
+                description: "Creates a multi-line text input control.",
+                example: "<textarea rows=\"4\" cols=\"50\">Enter text here...</textarea>",
+                usage: "Use for longer text inputs like comments or messages."
+            },
+            {
+                name: "select, option",
+                category: "forms",
+                description: "Creates a drop-down list of options.",
+                example: "<select>\n  <option value=\"1\">Option 1</option>\n  <option value=\"2\">Option 2</option>\n</select>",
+                usage: "Use when users need to choose from predefined options."
+            },
+            {
+                name: "header",
+                category: "semantic",
+                description: "Represents introductory content or a set of navigational links.",
+                example: "<header>\n  <h1>Website Title</h1>\n  <nav>...</nav>\n</header>",
+                usage: "Typically contains the site logo, main navigation, etc."
+            },
+            {
+                name: "nav",
+                category: "semantic",
+                description: "Defines a section of navigation links.",
+                example: "<nav>\n  <a href=\"/home\">Home</a>\n  <a href=\"/about\">About</a>\n</nav>",
+                usage: "Use for major navigation blocks, not all groups of links."
+            },
+            {
+                name: "main",
+                category: "semantic",
+                description: "Specifies the main content of a document.",
+                example: "<main>\n  <h1>Article Title</h1>\n  <p>Article content...</p>\n</main>",
+                usage: "Should be unique to the document, not repeated."
+            },
+            {
+                name: "article",
+                category: "semantic",
+                description: "Represents a self-contained composition in a document.",
+                example: "<article>\n  <h2>Blog Post Title</h2>\n  <p>Blog post content...</p>\n</article>",
+                usage: "Use for content that could be distributed independently."
+            },
+            {
+                name: "section",
+                category: "semantic",
+                description: "Defines a section in a document.",
+                example: "<section>\n  <h2>Chapter 1</h2>\n  <p>Chapter content...</p>\n</section>",
+                usage: "Use for thematic grouping of content."
+            },
+            {
+                name: "aside",
+                category: "semantic",
+                description: "Defines content aside from the main content.",
+                example: "<aside>\n  <h3>Related Links</h3>\n  <ul>...</ul>\n</aside>",
+                usage: "Use for sidebars, pull quotes, or advertising."
+            },
+            {
+                name: "footer",
+                category: "semantic",
+                description: "Defines a footer for a document or section.",
+                example: "<footer>\n  <p>Copyright 2023</p>\n  <p>Contact info</p>\n</footer>",
+                usage: "Typically contains authorship, copyright, contact info."
+            },
+            {
+                name: "video",
+                category: "media",
+                description: "Embeds video content in a document.",
+                example: "<video controls>\n  <source src=\"movie.mp4\" type=\"video/mp4\">\n  Your browser does not support the video tag.\n</video>",
+                usage: "Include multiple source formats for cross-browser compatibility."
+            },
+            {
+                name: "audio",
+                category: "media",
+                description: "Embeds sound content in a document.",
+                example: "<audio controls>\n  <source src=\"audio.mp3\" type=\"audio/mpeg\">\n  Your browser does not support the audio tag.\n</audio>",
+                usage: "Similar to video tag, include multiple source formats."
+            },
+            {
+                name: "canvas",
+                category: "media",
+                description: "Used to draw graphics via scripting (usually JavaScript).",
+                example: "<canvas id=\"myCanvas\" width=\"200\" height=\"100\"></canvas>",
+                usage: "Requires JavaScript to actually draw on the canvas."
+            },
+            {
+                name: "svg",
+                category: "media",
+                description: "Defines a container for SVG graphics.",
+                example: "<svg width=\"100\" height=\"100\">\n  <circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"red\" />\n</svg>",
+                usage: "Use for vector graphics that scale without quality loss."
+            }
+        ];
+
+        // Function to display tags
+        function displayTags(tags) {
+            const container = document.getElementById('tagContainer');
+            container.innerHTML = '';
+            
+            tags.forEach(tag => {
+                const card = document.createElement('div');
+                card.className = 'tag-card';
+                card.setAttribute('data-category', tag.category);
+                
+                card.innerHTML = `
+                    <div class="tag-header">
+                        <div class="tag-name">&lt;${tag.name}&gt;</div>
+                        <div class="tag-type">${tag.category}</div>
+                    </div>
+                    <div class="tag-description">${tag.description}</div>
+                    <div class="tag-example">${tag.example}</div>
+                    <div class="tag-usage">${tag.usage}</div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Initial display of all tags
+        displayTags(htmlTags);
+
+        // Search functionality
+        document.getElementById('tagSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredTags = htmlTags.filter(tag => 
+                tag.name.toLowerCase().includes(searchTerm) || 
+                tag.description.toLowerCase().includes(searchTerm)
+            );
+            displayTags(filteredTags);
+        });
+
+        // Category filtering
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                if (category === 'all') {
+                    displayTags(htmlTags);
+                } else {
+                    const filteredTags = htmlTags.filter(tag => tag.category === category);
+                    displayTags(filteredTags);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

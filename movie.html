@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBUBE UNIVERSAL PAGE</title>
+  <style>
+    :root {
+      --bg:#ffffff;
+      --card:hsl(230, 72%, 89%);
+      --muted:#123;
+      --text:#b9b9b9;
+      --accent:#ff0000;
+      --accent-2:#af98f4;
+      --danger:#ff6b6b;
+      --shadow: 0 10px 30px rgba(129, 128, 128, 0.35);
+    }
+    
+
+    * {box-sizing: border-box;}
+    html, body {height:100%; margin:0;}
+
+    body {
+      background: radial-gradient(circle at 10% 10%, rgba(106,161,255,.08), transparent), var(--bg);
+      color: var(--text);
+      font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    a {color: var(--accent);}
+
+    .wrap {max-width:1200px; margin:24px auto; padding:0 16px;}
+
+    header {display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:16px;}
+
+    .brand {display:flex; align-items:center; gap:12px;}
+    .logo {
+      width:44px; height:44px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid; place-items:center; box-shadow:var(--shadow);
+    }
+    .logo span {font-weight:900; color:rgb(241,166,6);}
+
+    h1 {font-size:20px; margin:0;}
+    .badge {font-size:12px; padding:4px 8px; border-radius:999px; background:#223; color:var(--muted); border:1px solid #fe069f;}
+
+    .grid {display:grid; grid-template-columns:320px 1fr; gap:20px;}
+    @media (max-width:900px) {.grid{grid-template-columns:1fr;}}
+
+    .card {
+      background:rgba(23,27,46,.7);
+      backdrop-filter: blur(6px);
+      border:1px solid #242a24;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+    }
+    .card h2 {font-size:16px; margin:0 0 12px 0;}
+    .section {padding:16px;}
+    .hr {height:1px; background:#00ff0025; margin:10px 0;}
+
+    .upload-form label {display:block; font-size:13px; color:var(--muted); margin:10px 0 6px;}
+    .control {
+      width:100%; padding:10px 12px; border-radius:10px;
+      border:1px dashed #3ede08; background:#12162a; color:var(--text);
+    }
+    .dropzone {
+      margin-top:8px; border:2px dashed var(--accent);
+      background:rgba(106,161,255,.08); padding:10px; text-align:center; cursor:pointer;
+    }
+    .btn {
+      appearance:none; border:none;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:rgb(255,208,0); padding:10px 14px;
+      border-radius:12px; font-weight:600; cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+    .btn.secondary {background:#1b2242; color:var(--text); border:1px solid #2c3250;}
+    .btn.danger {background:var(--danger);}
+    .btn:disabled {opacity:.5; cursor:not-allowed;}
+
+    .toolbar {display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px;}
+    .chip {padding:8px 12px; border:1px solid #2c3250; color:var(--muted); cursor:pointer;}
+    .chip.active {border-color:var(--accent); color:var(--text);}
+    .search {padding:8px; border-radius:8px; border:1px solid #2c3250; background:#12162a; color:var(--text);}
+
+    .library {display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;}
+    .item {
+      background:#0f1530; border:1px solid #2c3250; border-radius:14px;
+      padding:12px; display:flex; flex-direction:column; gap:10px;
+    }
+    .item .meta {display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:12px;}
+    .item h3 {margin:0; font-size:14px;}
+    .pill {font-size:11px; border:1px solid #1633c2; padding:2px 8px; border-radius:999px;}
+    .row {display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+
+    .ads .ad {
+      display:block; background:linear-gradient(135deg,#000,#111);
+      border:1px solid #000; border-radius:12px;
+      padding:14px; margin:10px 0; text-decoration:none;
+    }
+    .ads .ad small {display:block; color:var(--muted);}
+    .ads .ad strong {display:block; margin-top:4px; color:var(--text);}
+
+    .note {font-size:12px; color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"><span>MH</span></div>
+        <div>
+          <h1>ANIME PICTURE/VIDEO</h1>
+          <div class="badge">Upload & download contents you own or have rights to.</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left -->
+      <aside class="card section">
+        <h2>Upload media</h2>
+        <form id="upload-form" class="upload-form" autocomplete="off">
+          <label for="title">Title</label>
+          <input id="title" class="control" placeholder="e.g., In-House Short Film/ My Single" required/>
+
+          <label for="category">Category</label>
+          <select id="category" class="control">
+            <option value="movie">MOVIE</option>
+            <option value="music">PICTURE</option>
+          </select>
+
+          <label>Choose file</label>
+          <div id="dropzone" class="dropzone"> 
+            <input id="file" type="file" accept="video/*,audio/*" style="display:none"/>
+            <p><strong>Click to choose</strong> or drag & drop a file here (PICTURE & MOVIES)</p>
+            <small class="note">Supported: mp4, mkv, mov, avi, mp3, wav, m4a....</small>
+          </div>
+
+          <div class="row" style="margin-top: 12px;">
+            <button class="btn" type="submit">Upload</button>
+            <button class="btn secondary" id="clearAll" type="button">Clear All</button>
+          </div>
+        </form>
+
+        <div class="hr"></div>
+
+        <h2>Sponsored / Ad Links</h2>
+        <form id="adForm" class="upload-form">
+          <label for="adTitle">Ad title</label>
+          <input id="adTitle" class="control" placeholder="e.g., Stream on Boomplay"/>
+          <label for="adUrl">Ad URL</label>
+          <input id="adUrl" type="url" class="control" placeholder="https://example.com"/>
+          <div class="row" style="margin-top: 10px;">
+            <button class="btn secondary" type="submit">Add Ad</button>
+            <button class="btn danger" id="clearAds" type="button">Clear Ads</button>
+          </div>
+        </form>
+        <div class="ads" id="ads"></div>
+      </aside>
+
+      <!-- Right -->
+      <main class="card section">
+        <h2>Your Library</h2>
+        <div class="toolbar">
+          <button class="chip active" data-filter="all">ANIME PICS</button>
+          <button class="chip" data-filter="music">ANIME MOVIES</button>
+          <input id="search" class="search" placeholder="Search by title..."/>
+          <select id="sort" class="chip" style="border-radius:12px">
+            <option value="new">Newest</option>
+            <option value="old">Oldest</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+            <option value="size">Size</option>
+          </select>
+        </div>
+        <div id="library" class="library" aria-live="polite"></div>
+      </main>
+    </div>
+
+    <p class="note" style="margin-top: 18px;">◬□ Legal: Do not upload or share copyrighted works unless you own them or have explicit permission.</p>
+  </div>
+
+  <script>
+    // IndexedDB setup
+    const DB_NAME = 'media-hub-db';
+    const DB_VERSION = 1;
+    let db;
+
+    function openDB(){
+      return new Promise((resolve,reject)=>{
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e)=>{
+          const _db = e.target.result;
+          if(!_db.objectStoreNames.contains('media')){
+            const store = _db.createObjectStore('media',{keyPath:'id',autoIncrement:true});
+            store.createIndex('by_type','type');
+            store.createIndex('by_title','title');
+            store.createIndex('by_created','created');
+          }
+          if(!_db.objectStoreNames.contains('ads')){
+            _db.createObjectStore('ads',{keyPath:'id',autoIncrement:true});
+          }
+        };
+        req.onsuccess = ()=>{db=req.result; resolve(db);};
+        req.onerror = ()=>reject(req.error);
+      });
+    }
+
+    function tx(store, mode='readonly'){return db.transaction(store,mode).objectStore(store);}
+
+    async function addMedia(rec){
+      return new Promise((res,rej)=>{
+        const r = tx('media','readwrite').add(rec);
+        r.onsuccess=()=>res();
+        r.onerror=()=>rej(r.error);
+      });
+    }
+
+    async function getAllMedia(){
+      return new Promise((res,rej)=>{
+        const r = tx('media').getAll();
+        r.onsuccess=()=>res(r.result);
+        r.onerror=()=>rej(r.error);
+      });
+    }
+
+    function fmtBytes(b){
+      if(b===0) return '0B';
+      const k=1024;
+      const sizes=['B','KB','MB','GB','TB'];
+      const i=Math.floor(Math.log(b)/Math.log(k));
+      return (b/Math.pow(k,i)).toFixed(2)+' '+sizes[i];
+    }
+
+    // UI Logic
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file');
+    const form = document.getElementById('upload-form');
+    const libraryEl = document.getElementById('library');
+    const filterButtons = [...document.querySelectorAll('.chip[data-filter]')];
+    const searchInput= document.getElementById('search');
+    const sortSelect= document.getElementById('sort');
+    const clearBtn= document.getElementById('clearAll');
+
+    let filter='all';
+    let items=[];
+
+    function renderLibrary(){
+      libraryEl.innerHTML='';
+      const q = searchInput.value.trim().toLowerCase();
+      let list=items.filter(i=> filter==='all'?true:i.type===filter);
+      if(q) list=list.filter(i=>i.title.toLowerCase().includes(q));
+
+      switch(sortSelect.value){
+        case 'new': list.sort((a,b)=> b.created-a.created); break;
+        case 'old': list.sort((a,b)=> a.created-b.created); break;
+        case 'az': list.sort((a,b)=> a.title.localeCompare(b.title)); break;
+        case 'za': list.sort((a,b)=> b.title.localeCompare(a.title)); break;
+        case 'size': list.sort((a,b)=> b.size-a.size); break;
+      }
+
+      if(!list.length){
+        libraryEl.innerHTML = `<div class="note">No items yet. Upload something to get started.</div>`;
+        return;
+      }
+
+      for(const m of list){
+        const url = URL.createObjectURL(m.blob);
+        const el = document.createElement('div');
+        el.className='item';
+        el.innerHTML=`
+          <div class="meta"><span class="pill">${m.type==='movie'?'Movie':'Music'}</span></div>
+          <h3 title="${m.title}">${m.title}</h3>
+          <div class="row">
+            <a class="btn" href="${url}" download="${encodeURIComponent(m.title)}">Download</a>
+            <button class="btn secondary" data-play>Preview</button>
+            <button class="btn danger" data-delete>Delete</button>
+          </div>
+          <div class="preview" hidden></div>
+        `;
+        libraryEl.appendChild(el);
+      }
+    }
+
+    async function loadItems(){
+      items=await getAllMedia();
+      renderLibrary();
+    }
+
+    dropzone.addEventListener('click',()=> fileInput.click());
+    ['dragenter','dragover'].forEach(ev=>dropzone.addEventListener(ev,e=>{
+      e.preventDefault(); dropzone.classList.add('drag');
+    }));
+    ['dragleave','drop'].forEach(ev=>dropzone.addEventListener(ev,e=>{
+      e.preventDefault(); dropzone.classList.remove('drag');
+    }));
+
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const title=document.getElementById('title').value.trim();
+      const type=document.getElementById('category').value;
+      const f=fileInput.files?.[0];
+      if(!title||!f){alert('Please provide a title and choose a file.'); return;}
+      const allowed=['video/','audio/'];
+      if(!allowed.some(p=>f.type.startsWith(p))){alert('Only audio/video files allowed.'); return;}
+      const rec={title,type,size:f.size,created:Date.now(),blob:f};
+      await addMedia(rec);
+      form.reset(); fileInput.value="";
+      await loadItems();
+    });
+
+    filterButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      filterButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      filter=btn.dataset.filter;
+      renderLibrary();
+    }));
+
+    (async()=>{await openDB(); await loadItems();})();
+    
+  </script>
+</body>
+</html>
