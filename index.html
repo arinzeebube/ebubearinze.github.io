@@ -205,16 +205,18 @@
             </div>
           </div>
 
-          <!-- Monkey King -->
-          <div class="movie-card">
-            <div class="quality-badge">4K</div>
-            <img src="/images/monkey king.png" alt="Monkey King Poster" class="movie-poster">
-            <div class="movie-info">
-              <h3 class="movie-title">Monkey King</h3>
-              <div class="movie-meta"><span>2022</span><span>Action</span></div>
-              <button class="download-btn download-trigger" data-movie="Monkey King" data-slug="Monkey King">Download</button>
-            </div>
-          </div>
+         <!-- ...existing code... -->
+<!-- Monkey King card -->
+<div class="movie-card">
+  <div class="quality-badge">4K</div>
+  <img src="images/monkey%20king.png" alt="Monkey King Poster" class="movie-poster">
+  <div class="movie-info">
+    <h3 class="movie-title">Monkey King</h3>
+    <div class="movie-meta"><span>2022</span><span>Action</span></div>
+    <button class="download-btn download-trigger" data-movie="Monkey King" data-slug="monkey-king">Download</button>
+  </div>
+</div>
+<!-- ...existing code... -->
 
           <!-- Movie 5 -->
           <div class="movie-card">
@@ -323,6 +325,8 @@
 // ...existing code...
 // ...existing code...
 
+// ...existing code...
+
 const downloadMap = { 
   'monkey-king-reborn': {
     'Movie': 'https://drive.google.com/uc?export=download&id=1tkMR3tNFuRV10zo27XhVl1Kf_wkggQ-l'
@@ -332,13 +336,13 @@ const downloadMap = {
   },
   'kung-fu-panda-4': {
     'Movie': 'https://drive.google.com/uc?export=download&id=1NbREOzz12pCm4c5e-VJF_4CzJz2BIVO8'
-  }
-    },
+  },
   'monkey-king': {
     'Movie': 'https://drive.google.com/uc?export=download&id=1NbREOzz12pCm4c5e-VJF_4CzJz2BIVO8'
   }
 };
 
+// ...existing code...
 // ...existing code...
 
     const movieButtons = document.querySelectorAll('.download-trigger');
